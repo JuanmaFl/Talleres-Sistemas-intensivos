@@ -1,0 +1,7 @@
+Apache Spark es un motor de procesamiento distribuido que mantiene los datos en memoria.
+A diferencia de MapReduce, Spark evita escribir resultados intermedios en disco.
+El DAG de Spark permite optimizar el plan de ejecucion antes de correr cualquier tarea.
+Los RDDs son la abstraccion fundamental de Spark para distribuir datos entre workers.
+La evaluacion perezosa de Spark acumula transformaciones y las ejecuta solo cuando se necesita el resultado.
+Spark es especialmente eficiente para algoritmos iterativos como los de machine learning.
+En benchmarks reales, Spark puede ser entre 10x y 100x mas rapido que MapReduce para datos en memoria.

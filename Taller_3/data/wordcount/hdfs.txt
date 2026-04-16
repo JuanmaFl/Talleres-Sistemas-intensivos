@@ -1,0 +1,5 @@
+El NameNode administra los metadatos y las ubicaciones de los bloques en HDFS.
+Los DataNode almacenan los bloques fisicos y reportan su estado al NameNode.
+La replicacion de bloques aumenta la disponibilidad y la resiliencia del sistema.
+HDFS divide cada archivo en bloques de 128 MB por defecto antes de distribuirlos.
+El factor de replicacion determina cuantas copias de cada bloque existen en el cluster.

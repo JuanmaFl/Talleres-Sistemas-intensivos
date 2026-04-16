@@ -1,0 +1,5 @@
+Hadoop permite procesar datos en batch sobre un cluster distribuido.
+HDFS distribuye bloques entre nodos y tolera fallos de forma automatica.
+MapReduce divide el trabajo en etapas map y reduce sobre el cluster.
+El ecosistema Hadoop incluye herramientas para almacenamiento y procesamiento a escala.
+Batch processing es ideal cuando la latencia no es critica y el volumen de datos es grande.

@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \":*)",
+      "Bash(python3 -c \"import json; json.load\\(open\\(''/Users/andres.sacrealzate/Downloads/Personal/Clases/Sistemas intensivos/Repos/Taller_6/notebooks/taller6.ipynb''\\)\\); print\\(''JSON valido''\\)\")",
+      "Bash(chmod +x \"/Users/andres.sacrealzate/Downloads/Personal/Clases/Sistemas intensivos/Repos/Taller_3/scripts/common.sh\" \"/Users/andres.sacrealzate/Downloads/Personal/Clases/Sistemas intensivos/Repos/Taller_3/scripts/bootstrap-hdfs.sh\" \"/Users/andres.sacrealzate/Downloads/Personal/Clases/Sistemas intensivos/Repos/Taller_3/scripts/run-wordcount-mr.sh\" \"/Users/andres.sacrealzate/Downloads/Personal/Clases/Sistemas intensivos/Repos/Taller_3/scripts/run-wordcount-spark.sh\" \"/Users/andres.sacrealzate/Downloads/Personal/Clases/Sistemas intensivos/Repos/Taller_3/scripts/compare.sh\" \"/Users/andres.sacrealzate/Downloads/Personal/Clases/Sistemas intensivos/Repos/Taller_3/scripts/status.sh\")",
+      "Bash(bash -n \"/Users/andres.sacrealzate/Downloads/Personal/Clases/Sistemas intensivos/Repos/Taller_3/scripts/common.sh\")",
+      "Bash(bash -n \"/Users/andres.sacrealzate/Downloads/Personal/Clases/Sistemas intensivos/Repos/Taller_3/scripts/compare.sh\")",
+      "Bash(bash -n \"/Users/andres.sacrealzate/Downloads/Personal/Clases/Sistemas intensivos/Repos/Taller_3/scripts/run-wordcount-mr.sh\")",
+      "Bash(bash -n \"/Users/andres.sacrealzate/Downloads/Personal/Clases/Sistemas intensivos/Repos/Taller_3/scripts/run-wordcount-spark.sh\")"
+    ],
+    "additionalDirectories": [
+      "/Users/andres.sacrealzate/Downloads/Personal/Clases/Sistemas intensivos/Repos/Taller_3"
+    ]
+  }
+}

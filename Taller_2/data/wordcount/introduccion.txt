@@ -1,0 +1,3 @@
+Hadoop permite procesar datos en batch sobre un cluster.
+HDFS distribuye bloques entre nodos y tolera fallos.
+MapReduce divide el trabajo en etapas map y reduce.

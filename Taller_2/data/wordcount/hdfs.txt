@@ -1,0 +1,3 @@
+El NameNode administra metadatos y ubicaciones de bloques.
+Los DataNode almacenan los bloques fisicos del sistema.
+La replicacion aumenta disponibilidad y resiliencia.

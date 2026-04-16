@@ -1,0 +1,31 @@
+id,fecha,producto,categoria,cantidad,precio_unitario,region
+1,2024-01-05,Laptop,Computadores,2,1200.00,Bogota
+2,2024-01-08,Teclado,Perifericos,5,45.00,Medellin
+3,2024-01-12,Monitor,Pantallas,3,350.00,Bogota
+4,2024-01-15,Mouse,Perifericos,8,25.00,Cali
+5,2024-01-18,Auriculares,Audio,4,80.00,Barranquilla
+6,2024-01-22,Webcam,Perifericos,2,95.00,Bogota
+7,2024-01-25,Disco SSD,Almacenamiento,6,130.00,Medellin
+8,2024-01-28,RAM,Componentes,10,55.00,Bogota
+9,2024-02-02,Tablet,Moviles,3,420.00,Cali
+10,2024-02-05,Smartphone,Moviles,5,650.00,Barranquilla
+11,2024-02-08,Laptop,Computadores,1,1350.00,Medellin
+12,2024-02-12,Monitor,Pantallas,2,380.00,Bogota
+13,2024-02-15,Teclado,Perifericos,7,48.00,Cali
+14,2024-02-18,Disco SSD,Almacenamiento,4,140.00,Bogota
+15,2024-02-22,Auriculares,Audio,6,85.00,Medellin
+16,2024-02-26,Webcam,Perifericos,3,99.00,Barranquilla
+17,2024-03-01,RAM,Componentes,12,58.00,Bogota
+18,2024-03-05,Mouse,Perifericos,10,27.00,Cali
+19,2024-03-08,Smartphone,Moviles,4,700.00,Bogota
+20,2024-03-12,Tablet,Moviles,2,450.00,Medellin
+21,2024-03-15,Laptop,Computadores,3,1250.00,Bogota
+22,2024-03-18,Monitor,Pantallas,4,360.00,Barranquilla
+23,2024-03-20,Teclado,Perifericos,6,46.00,Bogota
+24,2024-03-22,Disco SSD,Almacenamiento,5,135.00,Cali
+25,2024-03-25,Auriculares,Audio,3,82.00,Bogota
+26,2024-03-26,Webcam,Perifericos,4,97.00,Medellin
+27,2024-03-27,RAM,Componentes,8,56.00,Barranquilla
+28,2024-03-28,Mouse,Perifericos,15,26.00,Bogota
+29,2024-03-29,Smartphone,Moviles,2,680.00,Cali
+30,2024-03-31,Laptop,Computadores,2,1300.00,Medellin

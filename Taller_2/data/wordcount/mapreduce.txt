@@ -1,0 +1,3 @@
+WordCount es un ejemplo clasico para entender procesamiento batch.
+Cada mapper emite pares clave valor.
+Cada reducer agrega ocurrencias por palabra.

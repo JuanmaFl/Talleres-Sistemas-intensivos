@@ -1,0 +1,11 @@
+producto,categoria,proveedor,margen_pct
+Laptop,Computadores,TechGlobal S.A.,0.32
+Teclado,Perifericos,InputDevices Ltda.,0.40
+Monitor,Pantallas,VisualPro Corp.,0.28
+Mouse,Perifericos,InputDevices Ltda.,0.42
+Auriculares,Audio,SoundWave Inc.,0.35
+Webcam,Perifericos,OpticsTech S.A.,0.38
+Disco SSD,Almacenamiento,StorageMaster Ltda.,0.30
+RAM,Componentes,MemoryTech Corp.,0.33
+Tablet,Moviles,MobilePro S.A.,0.27
+Smartphone,Moviles,GlobalComm Inc.,0.22

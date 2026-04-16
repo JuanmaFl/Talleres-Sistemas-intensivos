@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(chmod +x \"/Users/andres.sacrealzate/Downloads/Personal/Clases/Sistemas intensivos/Repos/Taller_5/scripts/status.sh\")",
+      "Bash(chmod +x \"/Users/andres.sacrealzate/Downloads/Personal/Clases/Sistemas intensivos/Repos/Taller_4/scripts/run-job.sh\" \"/Users/andres.sacrealzate/Downloads/Personal/Clases/Sistemas intensivos/Repos/Taller_4/scripts/status.sh\")",
+      "Bash(chmod +x \"/Users/andres.sacrealzate/Downloads/Personal/Clases/Sistemas intensivos/Repos/Taller_6/scripts/ingest.sh\" \"/Users/andres.sacrealzate/Downloads/Personal/Clases/Sistemas intensivos/Repos/Taller_6/scripts/transform.sh\" \"/Users/andres.sacrealzate/Downloads/Personal/Clases/Sistemas intensivos/Repos/Taller_6/scripts/query.sh\" \"/Users/andres.sacrealzate/Downloads/Personal/Clases/Sistemas intensivos/Repos/Taller_6/scripts/status.sh\")"
+    ]
+  }
+}

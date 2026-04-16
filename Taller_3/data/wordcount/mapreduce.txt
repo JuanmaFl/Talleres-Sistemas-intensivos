@@ -1,0 +1,6 @@
+WordCount es el ejemplo clasico para entender el procesamiento batch con MapReduce.
+Cada mapper lee un bloque de datos y emite pares clave valor para cada palabra.
+La fase de shuffle ordena y agrupa los pares por clave antes de enviarlos al reducer.
+Cada reducer recibe todas las ocurrencias de una palabra y calcula el conteo final.
+MapReduce escribe los resultados intermedios y finales en disco, lo que lo hace tolerante a fallos.
+El overhead de escritura en disco es la principal razon por la que MapReduce es mas lento que Spark.
