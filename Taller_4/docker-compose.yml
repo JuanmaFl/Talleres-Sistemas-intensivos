@@ -1,8 +1,6 @@
-version: "3.8"
-
 services:
   spark-master:
-    image: bitnami/spark:3.5
+    image: apache/spark:latest
     platform: linux/amd64
     container_name: spark-master
     hostname: spark-master
@@ -13,43 +11,35 @@ services:
       - ./data:/data:ro
       - ./jobs:/jobs:ro
     environment:
-      - SPARK_MODE=master
       - SPARK_MASTER_HOST=spark-master
+    command: sleep infinity
 
   spark-worker-1:
-    image: bitnami/spark:3.5
+    image: apache/spark:latest
     platform: linux/amd64
     container_name: spark-worker-1
     hostname: spark-worker-1
     volumes:
       - ./data:/data:ro
       - ./jobs:/jobs:ro
-    environment:
-      - SPARK_MODE=worker
-      - SPARK_MASTER_URL=spark://spark-master:7077
-      - SPARK_WORKER_MEMORY=1G
-      - SPARK_WORKER_CORES=2
     depends_on:
       - spark-master
+    command: sleep infinity
 
   spark-worker-2:
-    image: bitnami/spark:3.5
+    image: apache/spark:latest
     platform: linux/amd64
     container_name: spark-worker-2
     hostname: spark-worker-2
     volumes:
       - ./data:/data:ro
       - ./jobs:/jobs:ro
-    environment:
-      - SPARK_MODE=worker
-      - SPARK_MASTER_URL=spark://spark-master:7077
-      - SPARK_WORKER_MEMORY=1G
-      - SPARK_WORKER_CORES=2
     depends_on:
       - spark-master
+    command: sleep infinity
 
   jupyter:
-    image: jupyter/pyspark-notebook:spark-3.5.0
+    image: jupyter/pyspark-notebook:latest
     platform: linux/amd64
     container_name: jupyter
     ports:
@@ -60,7 +50,6 @@ services:
       - ./jobs:/home/jovyan/jobs:ro
     environment:
       - SPARK_MASTER=spark://spark-master:7077
-      - JUPYTER_ENABLE_LAB=yes
-      - JUPYTER_TOKEN=taller4
     depends_on:
       - spark-master
+    command: jupyter lab --ip=0.0.0.0 --allow-root --NotebookApp.token=taller4
