@@ -7,8 +7,8 @@ pero usando Spark, para comparar codigo, tiempo y enfoque.
 
 from pyspark.sql import SparkSession
 
-HDFS_INPUT  = "hdfs://namenode:9000/user/root/wordcount/input"
-HDFS_OUTPUT = "hdfs://namenode:9000/user/root/wordcount/output-spark"
+HDFS_INPUT  = "/user/root/wordcount/input"
+HDFS_OUTPUT = "/user/root/wordcount/output-spark"
 
 
 def main():
