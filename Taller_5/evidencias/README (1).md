@@ -173,3 +173,55 @@ docker run -d --name iceberg-rest --network taller_5_default \
 | Spark UI | http://\<IP\>:8080 | — |
 | MinIO Console | http://\<IP\>:9001 | admin / password123 |
 | Iceberg REST API | http://\<IP\>:8181 | — |
+
+---
+
+## Resumen y comparativa
+
+### Lo que demostramos en este taller
+
+| Capacidad | Cómo se hace en Iceberg | Por qué importa |
+|-----------|------------------------|-----------------|
+| ACID UPDATE | `UPDATE ... SET ... WHERE` | Corregir datos sin reescribir todo el dataset |
+| ACID DELETE | `DELETE FROM ... WHERE` | Cumplimiento GDPR: borrar datos de un usuario |
+| Time Travel | `VERSION AS OF <snapshot_id>` | Auditoría, reproducibilidad, recuperación de errores |
+| Schema Evolution | `ALTER TABLE ... ADD COLUMN` | Agregar features sin migrar datos históricos |
+
+### Iceberg por debajo: tres capas
+
+```
+Capa 1 - Catálogo (iceberg-rest)
+  └── Sabe cuál es el "current snapshot" de cada tabla
+
+Capa 2 - Metadata layer (JSON en MinIO /metadata/)
+  ├── table-metadata-xxxx.json   → schema, propiedades, lista de snapshots
+  ├── snap-xxxx.avro             → manifest list (apunta a manifests)
+  └── manifest-xxxx.avro         → lista de archivos Parquet con estadísticas
+
+Capa 3 - Data layer (Parquet en MinIO /data/)
+  └── xxxx.parquet               → datos reales, sin cambios entre snapshots
+```
+
+---
+
+## Preguntas de análisis
+
+**1. Después de hacer 3 operaciones (CREATE, UPDATE, DELETE), ¿cuántos snapshots existen en `.history`? ¿Por qué?**
+
+En nuestro taller quedaron 4 snapshots en el historial: el INSERT inicial, el UPDATE de precios de Laptop, y dos DELETEs. Cada operación de escritura en Iceberg crea un snapshot atómico independiente, sin importar cuántas filas afecte. Esto es intencional: cada snapshot representa el estado completo de la tabla en un momento dado, lo que permite hacer time travel a cualquier punto del historial. El número de snapshots crece con cada escritura y solo se reduce cuando se ejecuta `EXPIRE SNAPSHOTS` para limpiar los más antiguos.
+
+**2. Si haces un DELETE masivo accidental en producción (sin Iceberg), ¿cómo lo recuperas? ¿y con Iceberg?**
+
+Sin Iceberg la única opción es esperar a que el equipo de operaciones restaure un backup, lo que puede tomar horas o días dependiendo de la política de backups y el tamaño del dataset. Con frecuencia hay pérdida de datos entre el último backup y el momento del accidente. Con Iceberg la recuperación toma segundos: como el DELETE no borra los archivos físicos sino que crea un nuevo snapshot que los ignora, basta con hacer `INSERT INTO ventas SELECT * FROM ventas VERSION AS OF <ultimo_snapshot_bueno>` para restaurar el estado anterior. El archivo Parquet original nunca fue tocado.
+
+**3. Explica con tus palabras por qué Schema Evolution en Iceberg no requiere reescribir los archivos Parquet existentes.**
+
+Iceberg identifica las columnas internamente por un ID numérico, no por su nombre. Cuando se agrega una columna nueva con `ALTER TABLE ADD COLUMN`, Iceberg solo actualiza el archivo de metadatos JSON para registrar la nueva columna con un nuevo ID. Los archivos Parquet existentes no saben nada de esa columna — simplemente no la tienen. Cuando Spark lee esos archivos después de la evolución, detecta que el ID de la columna nueva no existe en el archivo y devuelve `NULL` automáticamente. No hay necesidad de abrir, transformar y reescribir los archivos físicos.
+
+**4. En el modelo Copy-on-Write de Iceberg, un UPDATE sobre 5 filas en un archivo de 1M filas, ¿cuántas filas se reescriben realmente?**
+
+En Copy-on-Write se reescriben las 1,000,000 de filas completas, no solo las 5 afectadas. Iceberg lee el archivo Parquet original completo, aplica el cambio en memoria sobre las 5 filas, y escribe un nuevo archivo Parquet con el millón de filas. El archivo original se mantiene para soportar time travel. Esto es la razón por la que para datasets con muchas escrituras pequeñas se prefiere el modo Merge-on-Read (MoR), que escribe solo un pequeño "delete file" con las posiciones de las filas modificadas y las nuevas versiones, aplazando la reescritura física para operaciones de compaction.
+
+**5. ¿Qué ventaja tiene usar MinIO (S3-compatible) en vez de HDFS para este tipo de arquitectura? ¿Qué implicaciones tiene para el Taller 6 con Trino?**
+
+MinIO implementa la API de S3, que es el estándar de facto para object storage en la nube. Esto significa que el mismo código que funciona contra MinIO local funciona sin cambios contra S3 en AWS, GCS en Google Cloud o Azure Blob Storage — solo cambia el endpoint. Con HDFS se estaría atado a una infraestructura Hadoop específica. Para el Taller 6, Trino puede leer las tablas Iceberg que dejamos en MinIO usando exactamente el mismo catálogo REST y las mismas credenciales, sin necesidad de mover ni transformar datos. Iceberg actúa como el contrato de formato entre Spark (que escribe) y Trino (que lee): ambos entienden los mismos metadatos y los mismos archivos Parquet.
